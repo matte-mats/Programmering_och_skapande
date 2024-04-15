@@ -3,7 +3,7 @@ try:
     c = a/b
 except (ZeroDivisionError, NameError):
     print("Något gick fel vid divisionen!")
-print("Här fortsätter programmet")
+print("Här fortsätter programmet...")
 
 while True:
     try:
