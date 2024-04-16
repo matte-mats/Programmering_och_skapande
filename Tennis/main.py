@@ -16,7 +16,7 @@ fps = 60
 
 # Skapa fönstret
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Mitt Spel")
+pygame.display.set_caption("Mats Spel")
 
 # Skapa en instans av spelaren
 player1 = Player(50, height/2)
