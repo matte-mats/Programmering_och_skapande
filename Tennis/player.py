@@ -15,12 +15,53 @@ class Player(pygame.sprite.Sprite):
 
         # Placera spelaren
         self.rect.center = (x, y)
-        # Ladda dina bilder för olika riktningar
-        self.image_up = pygame.image.load("images/uppåt.png").convert_alpha()
-        self.image_down = pygame.image.load("images/nedåt.png").convert_alpha()
 
-        # Sätt den aktuella bilden till den som är för uppåtrörelse som standard
-        self.image = self.image_up
+        # Läs in hela spritesheeten som en yta
+        self.spritesheet = pygame.image.load("images/player_spreadsheet.png").convert_alpha()
+
+        # Klipp ut varje bild från spritesheeten och spara dem i en lista
+        self.sprite_images = []
+        sprite_width = 25  # Bredden på varje bild i spritesheeten
+        sprite_height = 50  # Höjden på varje bild i spritesheeten
+        for i in range(4):  # Antalet bilder i spritesheeten (t.ex. om det finns 4 bilder)
+            rect = pygame.Rect(i * sprite_width, 0, sprite_width, sprite_height)
+            image = self.spritesheet.subsurface(rect)
+            self.sprite_images.append(image)
+
+        # Använd den första bilden som standard
+        self.image = self.sprite_images[0]
+
+        # Skapa en rektangel som omger spelaren
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+
+        # Variabel för att hålla reda på vilken bild som ska visas
+        self.current_frame = 0
+
+        # Variabel för att hålla reda på riktningen (upp/ned)
+        self.direction = "up"
+
+        self.animation_speed = 10  # Fördröjning mellan bildbyten
+
+        self.animation_counter = 0  # Räknare för att spåra fördröjning
+
+    def update(self):
+        # Uppdatera bild baserat på riktning och nuvarande frame
+        if self.direction == "up":
+            self.image = self.sprite_images[self.current_frame]
+        else:
+            # Om spelaren rör sig nedåt, använd samma bilder men vänd dem
+            self.image = pygame.transform.flip(self.sprite_images[self.current_frame], False, True)
+
+        # Uppdatera position
+        #self.rect.y += self.speed
+
+    def animate(self):
+        # Byt bild om det är dags enligt fördröjningen
+        self.animation_counter += 1
+        if self.animation_counter >= 10:
+            self.animation_counter = 0  # Återställ räknaren
+            self.current_frame = (self.current_frame + 1) % len(self.sprite_images)
 
 
 
@@ -41,17 +82,17 @@ class Player(pygame.sprite.Sprite):
         if player == 1:
             if keys[pygame.K_s]:
                 dy -= speed
-                up = True
+                self.direction = "up"
             if keys[pygame.K_z]:
                 dy += speed
-                up = False
+                self.direction = "down"
         if player == 2:
             if keys[pygame.K_UP]:
                 dy -= speed
-                up = True
+                self.direction = "up"
             if keys[pygame.K_DOWN]:
                 dy += speed
-                up = False
+                self.direction = "down"
 
         #kontrollera så att spelaren är på skärmen
         if self.rect.top + dy < 0:
@@ -61,8 +102,4 @@ class Player(pygame.sprite.Sprite):
 
         #uppdatera spelarens position och bild
         self.rect.y += dy
-        if up:
-            self.image = self.image_up
-        else:
-            self.image = self.image_down
 

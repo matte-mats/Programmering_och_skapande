@@ -64,6 +64,14 @@ while running:
     player1.move(height, 1)
     player2.move(height, 2)
 
+    # Använd spelarens update-metod för att uppdatera animationen
+    player1.update()
+    player2.update()
+
+    # Använd spelarens update-metod för att uppdatera animationen
+    player1.animate()
+    player2.animate()
+
     # Uppdatera alla sprites
     all_sprites.update()
 
