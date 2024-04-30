@@ -60,10 +60,6 @@ while running:
     # Rita bakgrunden först
     draw_background()
 
-    # Flytta spelarna
-    player1.move(height, 1)
-    player2.move(height, 2)
-
     # Använd spelarens update-metod för att uppdatera animationen
     player1.update()
     player2.update()
@@ -71,6 +67,11 @@ while running:
     # Använd spelarens update-metod för att uppdatera animationen
     player1.animate()
     player2.animate()
+
+    # Flytta spelarna
+    player1.move(height, 1)
+    player2.move(height, 2)
+
 
     # Uppdatera alla sprites
     all_sprites.update()
