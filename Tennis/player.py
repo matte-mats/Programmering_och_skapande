@@ -1,6 +1,7 @@
 import pygame
 
 # Skapa en spriteklass
+# Klass för att ta hand om en tennisspelare
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         # Anropa konstruktorn för Spriteklassen
