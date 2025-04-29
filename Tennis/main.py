@@ -7,8 +7,8 @@ from ball import Ball
 pygame.init()
 
 # Ange fönstrets dimensioner
-width = 800
-height = 600
+width = 850
+height = 650
 
 #Sätt uppdateringshastighet
 clock = pygame.time.Clock()
