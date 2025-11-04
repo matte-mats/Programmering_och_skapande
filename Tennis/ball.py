@@ -2,7 +2,7 @@ import pygame
 import random
 # Klass för att hantera hur bollen beter sig
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, screen_width, screen_height, other_sprites, radius=10, color=(255, 255, 255), speed=5):
+    def __init__(self, screen_width, screen_height, other_sprites, radius=20, color=(255, 255, 255), speed=5):
         super().__init__()
 
         # Skärmens dimensioner
